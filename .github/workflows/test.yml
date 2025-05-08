@@ -1,0 +1,7 @@
+name: github-actions-firstpipeline
+on: [push]
+jobs:
+  job1:
+    runs-on: self-hosted
+    steps:
+      - run: hostname -i >> /tmp/hostname.txt
