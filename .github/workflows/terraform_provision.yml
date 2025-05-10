@@ -1,0 +1,14 @@
+name: Terraform_apply_pipeline
+run-name: terraform_provision
+on: [workflow_dispatch]
+jobs:
+  terraform_apply:
+    runs-on: self-hosted
+    steps:
+      - name: using DevSecOps Repo
+        uses:
+        with:
+          repository: manojpadigineti-cloud/DevSecOps
+        run: |
+          terraform init -backend-config=dev/backend.tfvars
+          terraform apply -var-file=dev/dev.tfvars -var vault_token="" -auto-approve
