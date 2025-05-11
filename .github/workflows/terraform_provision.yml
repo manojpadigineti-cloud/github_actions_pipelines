@@ -1,6 +1,6 @@
 name: Terraform_apply_pipeline
 run-name: terraform_provision
-on: [push]
+on: [workflow_dispatch]
 jobs:
   terraform_apply:
     runs-on: self-hosted
