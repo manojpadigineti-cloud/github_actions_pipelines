@@ -11,4 +11,4 @@ jobs:
           repository: manojpadigineti-cloud/DevSecOps
         env:
           vault_token: ${{ secrets.VAULT_TOKEN }}
-      - run: terraform init -backend-config=dev/backend.tfvars ; terraform apply -var-file=terraform/AWS/roboshop_project/roboshop_instances/dev/dev.tfvars -var vault_token="$env:vault_token" -auto-approve
+      - run: terraform init -backend-config=dev/backend.tfvars ; terraform apply -var-file=terraform/AWS/roboshop_project/roboshop_instances/dev/dev.tfvars -var vault_token="$env.vault_token" -auto-approve
