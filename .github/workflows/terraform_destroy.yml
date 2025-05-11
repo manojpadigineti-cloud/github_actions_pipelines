@@ -1,0 +1,7 @@
+name: Terraform_destroy_pipeline
+run-name: terraform_provision
+on: [workflow_dispatch]
+jobs:
+  terraform_destroy:
+    runs-on: self-hosted
+    steps:
