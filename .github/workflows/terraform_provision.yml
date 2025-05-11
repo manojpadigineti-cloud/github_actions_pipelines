@@ -1,6 +1,6 @@
 name: Terraform_apply_pipeline
 run-name: terraform_provision
-on: [workflow_dispatch]
+on: [push]
 jobs:
   terraform_apply:
     runs-on: self-hosted
@@ -12,4 +12,6 @@ jobs:
         env:
           vault_token: ${{ secrets.VAULT_TOKEN }}
       - run: |
-          cd /actions-runner/_work/github_actions_pipelines/github_actions_pipelines/terraform/AWS/roboshop_project/roboshop_instances ; terraform init -backend-config=dev/backends.tfvars ; terraform apply -var-file=dev/dev.tfvars -var "vault_token=$vault_token" -auto-approve
+          cd /actions-runner/_work/github_actions_pipelines/github_actions_pipelines/terraform/AWS/roboshop_project/roboshop_instances
+          terraform init -backend-config=dev/backends.tfvars
+          terraform apply -var-file=dev/dev.tfvars -var "vault_token=$vault_token" -auto-approve
