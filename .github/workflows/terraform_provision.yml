@@ -12,6 +12,6 @@ jobs:
         env:
           vault_token: ${{ secrets.VAULT_TOKEN }}
       - run: |
-          cd /actions-runner/_work/github_actions_pipelines/github_actions_pipelines/terraform/AWS/roboshop_project/roboshop_instances/dev/
+          cd terraform/AWS/roboshop_project/roboshop_instances/dev/
           terraform init -backend-config=backends.tfvars
           terraform apply -var-file=dev.tfvars -var "vault_token=$vault_token" -auto-approve
