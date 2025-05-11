@@ -1,4 +1,4 @@
-name: Terraform_destroy
+name: Terraform_destroy_pipeline
 run-name: Terraform_destroy
 on: [workflow_dispatch]
 jobs:
