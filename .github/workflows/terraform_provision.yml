@@ -9,7 +9,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: manojpadigineti-cloud/DevSecOps
+          path: DevSecOps
         env:
           vault_token: ${{ secrets.VAULT_TOKEN }}
       - run: |
-         pwd ; terraform init -backend-config=/actions-runner/_work/github_actions_pipelines/github_actions_pipelines/terraform/AWS/roboshop_project/roboshop_instances/dev/backends.tfvars ; terraform apply -var-file=/actions-runner/_work/github_actions_pipelines/github_actions_pipelines/terraform/AWS/roboshop_project/roboshop_instances/dev/dev.tfvars -var vault_token="$vault_token" -auto-approve
+          terraform init -backend-config=backends.tfvars
+          terraform apply -var-file=dev.tfvars -var "vault_token=$vault_token" -auto-approve
