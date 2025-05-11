@@ -5,10 +5,10 @@ jobs:
   terraform_apply:
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v4
       - name: using DevSecOps Repo
+        uses: actions/checkout@v4
         with:
           repository: manojpadigineti-cloud/DevSecOps
         env:
           vault_token: ${{ secrets.VAULT_TOKEN }}
-        run: terraform init -backend-config=dev/backend.tfvars ; terraform apply -var-file=terraform/AWS/roboshop_project/roboshop_instances/dev/dev.tfvars -var vault_token="$vault_token" -auto-approve
+      - run: terraform init -backend-config=dev/backend.tfvars ; terraform apply -var-file=terraform/AWS/roboshop_project/roboshop_instances/dev/dev.tfvars -var vault_token="$vault_token" -auto-approve
