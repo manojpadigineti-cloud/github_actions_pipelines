@@ -1,7 +1,22 @@
-name: Terraform_destroy_pipeline
-run-name: terraform_provision
+name: Terraform_destroy
+run-name: Terraform_destroy
 on: [workflow_dispatch]
 jobs:
   terraform_destroy:
     runs-on: self-hosted
     steps:
+      - name: git code checkout
+        uses: actions/checkout@v4
+        with:
+          repository: manojpadigineti-cloud/DevSecOps
+      - name: terraform init
+        run: |
+          cd /actions-runner/_work/github_actions_pipelines/github_actions_pipelines/terraform/AWS/roboshop_project/roboshop_instances
+          terraform init -backend-config=dev/backends.tfvars
+      - name: terraform destroy
+        run: |
+          cd /actions-runner/_work/github_actions_pipelines/github_actions_pipelines/terraform/AWS/roboshop_project/roboshop_instances
+          terraform destroy -var-file=dev/dev.tfvars -var vault_token="$VAULT_TOKEN" -auto-approve
+        env:
+          VAULT_TOKEN: ${{ secrets.VAULT_TOKEN }}
+
