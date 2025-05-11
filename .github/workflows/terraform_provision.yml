@@ -6,9 +6,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: using DevSecOps Repo
-        uses:
+        uses: actions/checkout@v4
         with:
           repository: manojpadigineti-cloud/DevSecOps
-        run: |
-          terraform init -backend-config=dev/backend.tfvars
-          terraform apply -var-file=dev/dev.tfvars -var vault_token="" -auto-approve
+        run: terraform init -backend-config=dev/backend.tfvars ; terraform apply -var-file=dev/dev.tfvars -var vault_token="" -auto-approve
