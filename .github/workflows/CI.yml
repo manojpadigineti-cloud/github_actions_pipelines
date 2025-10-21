@@ -1,18 +1,26 @@
 name: CI_Pipeline
 on:
   workflow_call:
+    inputs:
+      app_name:
+        required: true
+        type: string
 run-name:  ${{ github.sha }} | ${{ github.event.head_commit.message }}
 jobs:
-  Build:
+  Docker_Build_Push:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
       - run: |
-          echo build in progress
+          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 260380093736.dkr.ecr.us-east-1.amazonaws.com
+          docker build -t ${{ inputs.app_name }}/${{ github.sha }} .
+          docker tag ${{ inputs.app_name }}:${{ github.sha }} 260380093736.dkr.ecr.us-east-1.amazonaws.com/${{ inputs.app_name }}:${{ github.sha }}
+          docker push 260380093736.dkr.ecr.us-east-1.amazonaws.com/${{ inputs.app_name }}:${{ github.sha }}
+          echo Docker Build and Push completed
   Test:
     runs-on: self-hosted
-    needs: Build
+    needs: Docker_Build_Push
     steps:
       - uses: actions/checkout@v4
       - run: |
-          echo test in progress testing
+          echo starting tests
