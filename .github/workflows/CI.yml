@@ -11,6 +11,7 @@ jobs:
           echo build in progress
   Test:
     runs-on: self-hosted
+    needs: Build
     steps:
       - uses: actions/checkout@v4
       - run: |
