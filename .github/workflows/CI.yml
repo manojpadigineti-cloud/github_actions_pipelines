@@ -1,0 +1,17 @@
+name: CI_Pipeline
+on:
+  workflow_call:
+run-name:  ${{ github.sha }} | ${{ github.event.head_commit.message }}
+jobs:
+  Build:
+    runs-on: selfhosted
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          echo build in progress
+  Test:
+    runs-on: selfhosted
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          echo test in progress
