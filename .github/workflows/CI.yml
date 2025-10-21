@@ -4,13 +4,13 @@ on:
 run-name:  ${{ github.sha }} | ${{ github.event.head_commit.message }}
 jobs:
   Build:
-    runs-on: Runner-1
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
       - run: |
           echo build in progress
   Test:
-    runs-on: Runner-1
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
       - run: |
