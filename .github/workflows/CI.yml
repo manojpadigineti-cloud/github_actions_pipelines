@@ -12,6 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
+          hostname -i
+          hostname
           aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 260380093736.dkr.ecr.us-east-1.amazonaws.com
           docker build -t ${{ inputs.app_name }}/${{ github.sha }} .
           docker tag ${{ inputs.app_name }}:${{ github.sha }} 260380093736.dkr.ecr.us-east-1.amazonaws.com/${{ inputs.app_name }}:${{ github.sha }}
